@@ -31,6 +31,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     private GoogleSignInClient mGoogle;
 
+    // Test Doang
+
     FirebaseAuth mFirebaseAuth;
 
     @Override
