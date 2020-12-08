@@ -6,4 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".schedule.SchedulingActivity">
 
+<<<<<<< HEAD
+=======
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp">
+
+        <devs.mulham.horizontalcalendar.HorizontalCalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/Light"
+            app:textColorSelected="@color/Second"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+>>>>>>> 6e269de4d12838bbb475ae9de343e665c42e5c8d
 </RelativeLayout>

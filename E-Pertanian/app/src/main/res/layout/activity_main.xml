@@ -16,6 +16,7 @@
         android:layout_centerVertical="true"/>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -31,7 +32,12 @@
             android:background="@color/Light"
             app:itemIconTint="@drawable/drawer_item"
             app:itemTextColor="@drawable/drawer_item"/>
-
     </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/cv"/>
 
 </RelativeLayout>
