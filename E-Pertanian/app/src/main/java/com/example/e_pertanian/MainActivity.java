@@ -2,16 +2,20 @@ package com.example.e_pertanian;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -43,6 +47,26 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         mGoogle = GoogleSignIn.getClient(this,gso);
 
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.tapBar);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navHome:
+                        Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.navSchedule:
+                        Toast.makeText(MainActivity.this, "schedule", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.navChat:
+                        Toast.makeText(MainActivity.this, "chat", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.navProfile:
+                        Toast.makeText(MainActivity.this, "profile", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
 
     }
 
