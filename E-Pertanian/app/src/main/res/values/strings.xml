@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">E-Pertanian</string>
     <string-array name="daftar_kegiatan">
-        <item id= "1">Irigasi</item>
-        <item id = "2">Watering</item>
-        <item id = "3">Sprinkle</item>
-        <item id = "4">Pemupukan</item>
-        <item id = "5">Penyemprotan Pestisida</item>
+        <item>Irigasi</item>
+        <item>Watering</item>
+        <item>Sprinkle</item>
+        <item>Pemupukan</item>
+        <item>Penyemprotan Pestisida</item>
     </string-array>
 
 

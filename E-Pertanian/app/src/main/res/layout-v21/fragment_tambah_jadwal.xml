@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@color/Primariy"
+    tools:context=".fragments.TambahJadwalFragment">
+
+
+    <TextView
+        android:id="@+id/judul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tambah Jadwal"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textColor="@color/Light"
+        />
+
+    <TextView
+        android:id="@+id/tvJK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18sp"
+        android:text="Jenis Kegiatan"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_below="@id/judul"/>
+
+    <Spinner
+        android:id="@+id/spJK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvJK"
+        android:entries="@array/daftar_kegiatan"/>
+
+    <TextView
+        android:id="@+id/tvtgl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18sp"
+        android:text="Tanggal"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_below="@id/spJK"/>
+
+    <EditText
+        android:id="@+id/etTW"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Pilih tanggal.."
+        android:clickable="true"
+        android:editable="false"
+        android:layout_below="@id/tvtgl" />
+
+    <TextView
+        android:id="@+id/tvWaktu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18sp"
+        android:text="Waktu"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_below="@id/etTW"/>
+
+    <EditText
+        android:id="@+id/etWaktu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Pilih waktu.."
+        android:clickable="true"
+        android:editable="false"
+        android:layout_below="@id/tvWaktu" />
+
+    <TextView
+        android:id="@+id/tvLama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18sp"
+        android:text="Lama(menit)"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_below="@id/etWaktu"/>
+
+    <EditText
+        android:id="@+id/etLama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="lama kegiatan.."
+        android:layout_below="@id/tvLama" />
+
+    <TextView
+        android:id="@+id/tvisAuto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18sp"
+        android:text="Otomatis?"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_below="@id/etLama"/>
+
+
+
+    <CheckBox
+        android:id="@+id/cbIsAuto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_alignTop="@+id/tvisAuto"
+        android:layout_toEndOf="@id/tvisAuto"
+        android:layout_toRightOf="@id/tvisAuto" />
+
+    <LinearLayout
+        android:layout_below="@id/tvisAuto"
+        android:layout_marginTop="128dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnBatal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Batal"
+            android:textSize="24sp"
+            android:textColor="#FF0000"
+            android:textStyle="bold"
+            android:backgroundTint="@color/Light" />
+
+        <Button
+            android:id="@+id/btnTambah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tambah"
+            android:textSize="24sp"
+            android:textColor="@color/Primariy"
+            android:textStyle="bold"
+            android:layout_marginLeft="64dp"
+            android:layout_alignTop="@id/btnBatal"
+            android:layout_toEndOf="@id/btnBatal"
+            android:backgroundTint="@color/Light"
+            android:layout_toRightOf="@id/btnBatal" />
+    </LinearLayout>
+</RelativeLayout>

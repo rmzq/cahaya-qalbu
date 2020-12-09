@@ -3,31 +3,55 @@ package com.example.e_pertanian.fragments;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.example.e_pertanian.MainActivity;
 import com.example.e_pertanian.R;
+import com.example.e_pertanian.model.Schedule;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Objects;
 
-public class TambahJadwalFragment extends Fragment {
+public class TambahJadwalFragment extends Fragment implements View.OnClickListener {
 
     Calendar kalender;
+    private Spinner jensiKegiatan;
     private EditText ettgl;
     private EditText etWkt;
     private EditText etLm;
+    private CheckBox isOto;
+
+    private Schedule jadwal;
+
+    private Button simpan, batal;
+
+    DatabaseReference mDatabase;
+
 
     public TambahJadwalFragment() {
         // Required empty public constructor
@@ -37,45 +61,44 @@ public class TambahJadwalFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        jadwal = new Schedule();
+
         kalender = Calendar.getInstance();
         ettgl = (EditText)getActivity().findViewById(R.id.etTW);
         etWkt = (EditText)getActivity().findViewById((R.id.etWaktu));
         etLm = (EditText)getActivity().findViewById(R.id.etLama);
+        jensiKegiatan = (Spinner)getActivity().findViewById(R.id.spJK);
+        isOto = (CheckBox)getActivity().findViewById(R.id.cbIsAuto);
+        simpan = (Button)getActivity().findViewById(R.id.btnTambah);
 
+        ettgl.setOnClickListener(this);
+        etWkt.setOnClickListener(this);
+        simpan.setOnClickListener(this);
 
-        TimePickerDialog.OnTimeSetListener waktu = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                kalender.set(Calendar.HOUR_OF_DAY,hourOfDay);
-                kalender.set(Calendar.MINUTE, minute);
-                updateWaktu();
-            }
-        };
-
-        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                kalender.set(Calendar.YEAR, year);
-                kalender.set(Calendar.MONTH, month);
-                kalender.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateTanggal();
-            }
-        };
-
-
-        ettgl.setOnClickListener(new View.OnClickListener() {
+        isOto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog((Activity)getContext(), date, kalender.get(Calendar.YEAR), kalender.get(Calendar.MONTH), kalender.get(Calendar.DAY_OF_MONTH)).show();
+                if (isOto.isChecked()){
+                    Toast.makeText(getActivity(), "tercek", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
-        etWkt.setOnClickListener(new View.OnClickListener() {
+        jensiKegiatan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                new TimePickerDialog((Activity)getContext(), waktu, kalender.get(Calendar.HOUR_OF_DAY), kalender.get(Calendar.MINUTE), true).show();
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                int jenisKg = parent.getSelectedItemPosition();
+                Toast.makeText(getActivity(), String.valueOf(jenisKg), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
+
     }
 
     private void updateWaktu() {
@@ -97,5 +120,89 @@ public class TambahJadwalFragment extends Fragment {
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         ettgl.setText(sdf.format(kalender.getTime()));
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btnTambah:
+                savejadwal();
+                break;
+            case R.id.etTW:
+                new DatePickerDialog((Activity) getContext(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        kalender.set(Calendar.YEAR, year);
+                        kalender.set(Calendar.MONTH, month);
+                        kalender.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        updateTanggal();
+                    }
+                }, kalender.get(Calendar.YEAR), kalender.get(Calendar.MONTH), kalender.get(Calendar.DAY_OF_MONTH)).show();
+                break;
+            case R.id.etWaktu:
+                new TimePickerDialog((Activity) getContext(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        kalender.set(Calendar.HOUR_OF_DAY,hourOfDay);
+                        kalender.set(Calendar.MINUTE, minute);
+                        updateWaktu();
+                    }
+                }, kalender.get(Calendar.HOUR_OF_DAY), kalender.get(Calendar.MINUTE), true).show();
+                break;
+            case R.id.etLama:
+                break;
+            default:
+        }
+    }
+
+    private void savejadwal(){
+        int jenisK = (int) jensiKegiatan.getSelectedItemId();
+        String tanggal = ettgl.getText().toString().trim();
+        String waktu = etWkt.getText().toString().trim();
+        int lama = Integer.parseInt(etLm.getText().toString());
+        boolean isAuto = isOto.isChecked();
+
+        boolean kosong = false;
+
+        /*
+        if (TextUtils.isEmpty(tanggal)){
+            kosong = true;
+            ettgl.setError("Ini tidak boleh kosong");
+        }
+
+        if (TextUtils.isEmpty(waktu)){
+            kosong = true;
+            etWkt.setError("Ini tidak boleh kosong");
+        }
+
+        if (TextUtils.isEmpty(String.valueOf(lama))){
+            kosong = true;
+            etLm.setError("Ini tidak boleh kosong");
+        }
+
+        if (TextUtils.isEmpty(String.valueOf(jenisK))){
+            kosong = true;
+            TextView errorText = (TextView)jensiKegiatan.getSelectedView();
+            errorText.setError("Ini tidak boleh kosong");
+        }
+
+         */
+
+        DatabaseReference db = mDatabase.child("jadwal");
+        Toast.makeText(getActivity(), "simpan jadwal", Toast.LENGTH_SHORT).show();
+
+        String id = db.push().getKey();
+        jadwal.setId(id);
+        jadwal.setTanggal(tanggal);
+        jadwal.setWaktu(waktu);
+        jadwal.setAuto(true);
+        jadwal.setJenisKg((long) jenisK);
+        jadwal.setLama((long) lama);
+        jadwal.setAuto(isAuto);
+
+
+        db.child(id).setValue(jadwal);
+        if (!kosong){
+        }
     }
 }
