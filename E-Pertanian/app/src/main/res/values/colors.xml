@@ -13,4 +13,8 @@
     <color name="Second">#F37055</color>
 
     <color name="Third_text">#999999</color>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
 </resources>
