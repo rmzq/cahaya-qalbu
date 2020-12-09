@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".watering.WateringPause"></activity>
+        <activity android:name=".irigasi.IrigasiPause"></activity>
+        <activity android:name=".irigasi.Irigasi" />
+        <activity android:name=".watering.WateringPause" />
         <activity android:name=".watering.Watering" />
         <activity android:name=".Login">
             <intent-filter>
@@ -22,7 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUp"/>
+        <activity android:name=".SignUp" />
         <activity
             android:name=".schedule.SchedulingActivity"
             android:theme="@style/Theme.EPertanian" />

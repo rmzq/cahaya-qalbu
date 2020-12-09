@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
     Button btnLogout;
-    FrameLayout schedule, watering;
+    FrameLayout schedule, watering, irigasi;
     FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogout = findViewById(R.id.btnLogout);
         schedule = findViewById(R.id.scheduling);
         watering = findViewById(R.id.watering);
+        irigasi = findViewById(R.id.irigasi);
 
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +49,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         watering.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intToMain = new Intent(MainActivity.this, Watering.class);
+                startActivity(intToMain);
+            }
+        });
+
+        irigasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intToMain = new Intent(MainActivity.this, Watering.class);
