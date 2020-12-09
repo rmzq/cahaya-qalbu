@@ -72,6 +72,7 @@ public class TambahJadwalFragment extends Fragment implements View.OnClickListen
         jensiKegiatan = (Spinner)getActivity().findViewById(R.id.spJK);
         isOto = (CheckBox)getActivity().findViewById(R.id.cbIsAuto);
         simpan = (Button)getActivity().findViewById(R.id.btnTambah);
+        batal = (Button)getActivity().findViewById(R.id.btnBatal);
 
         ettgl.setOnClickListener(this);
         etWkt.setOnClickListener(this);
@@ -89,8 +90,8 @@ public class TambahJadwalFragment extends Fragment implements View.OnClickListen
         jensiKegiatan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                int jenisKg = parent.getSelectedItemPosition();
-                Toast.makeText(getActivity(), String.valueOf(jenisKg), Toast.LENGTH_SHORT).show();
+                String isi = parent.getItemAtPosition(position).toString();
+                Toast.makeText(getActivity(), isi, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -156,53 +157,58 @@ public class TambahJadwalFragment extends Fragment implements View.OnClickListen
     }
 
     private void savejadwal(){
-        int jenisK = (int) jensiKegiatan.getSelectedItemId();
+        String jenisK =  jensiKegiatan.getSelectedItem().toString().trim();
         String tanggal = ettgl.getText().toString().trim();
         String waktu = etWkt.getText().toString().trim();
-        int lama = Integer.parseInt(etLm.getText().toString());
+        String lama = etLm.getText().toString().trim();
         boolean isAuto = isOto.isChecked();
 
-        boolean kosong = false;
+        boolean isEmptyFields = false;
 
-        /*
+
         if (TextUtils.isEmpty(tanggal)){
-            kosong = true;
-            ettgl.setError("Ini tidak boleh kosong");
+            isEmptyFields = true;
+            ettgl.setError("Field ini tidak boleh kosong");
         }
 
+
         if (TextUtils.isEmpty(waktu)){
-            kosong = true;
+            isEmptyFields = true;
             etWkt.setError("Ini tidak boleh kosong");
         }
 
-        if (TextUtils.isEmpty(String.valueOf(lama))){
-            kosong = true;
+
+        if (TextUtils.isEmpty(lama)){
+            isEmptyFields = true;
             etLm.setError("Ini tidak boleh kosong");
         }
 
+        /*
         if (TextUtils.isEmpty(String.valueOf(jenisK))){
-            kosong = true;
+            isEmptyFields = true;
             TextView errorText = (TextView)jensiKegiatan.getSelectedView();
             errorText.setError("Ini tidak boleh kosong");
         }
 
          */
 
-        DatabaseReference db = mDatabase.child("jadwal");
-        Toast.makeText(getActivity(), "simpan jadwal", Toast.LENGTH_SHORT).show();
+        if (!isEmptyFields){
+            DatabaseReference db = mDatabase.child("jadwal");
+            Toast.makeText(getActivity(), "Jadwal tersimpan", Toast.LENGTH_SHORT).show();
 
-        String id = db.push().getKey();
-        jadwal.setId(id);
-        jadwal.setTanggal(tanggal);
-        jadwal.setWaktu(waktu);
-        jadwal.setAuto(true);
-        jadwal.setJenisKg((long) jenisK);
-        jadwal.setLama((long) lama);
-        jadwal.setAuto(isAuto);
+            String id = db.push().getKey();
+            jadwal.setId(id);
+            jadwal.setTanggal(tanggal);
+            jadwal.setWaktu(waktu);
+            jadwal.setAuto(isAuto);
+            jadwal.setJenisKg(jenisK);
+            jadwal.setLama(lama);
+            jadwal.setAuto(isAuto);
 
 
-        db.child(id).setValue(jadwal);
-        if (!kosong){
+            db.child(id).setValue(jadwal);
+        }else {
+            Toast.makeText(getActivity(), "tidak tersimpan", Toast.LENGTH_SHORT).show();
         }
     }
 }
