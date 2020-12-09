@@ -13,7 +13,8 @@
         android:theme="@style/Theme.EPertanian" >
         <activity android:name=".schedule.SchedulingActivity" />
         <activity android:name=".SignInActivity" />
-        <activity android:name=".MainActivity" >
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
