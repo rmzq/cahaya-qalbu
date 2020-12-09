@@ -13,23 +13,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".watering.WateringPause"></activity>
+        <activity android:name=".watering.Watering" />
         <activity android:name=".Login">
-        </activity>
-
-        <activity android:name=".SignUp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SignUp"/>
         <activity
             android:name=".schedule.SchedulingActivity"
             android:theme="@style/Theme.EPertanian" />
         <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustNothing"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustNothing" />
     </application>
 
 </manifest>

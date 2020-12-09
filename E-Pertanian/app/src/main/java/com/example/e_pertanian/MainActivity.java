@@ -10,12 +10,13 @@ import android.widget.FrameLayout;
 
 
 import com.example.e_pertanian.schedule.SchedulingActivity;
+import com.example.e_pertanian.watering.Watering;
 import com.google.firebase.auth.FirebaseAuth;
 
 
 public class MainActivity extends AppCompatActivity {
     Button btnLogout;
-    FrameLayout schedule;
+    FrameLayout schedule, watering;
     FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnLogout = findViewById(R.id.btnLogout);
         schedule = findViewById(R.id.scheduling);
+        watering = findViewById(R.id.watering);
 
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +43,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intToMain = new Intent(MainActivity.this, SchedulingActivity.class);
+                startActivity(intToMain);
+            }
+        });
+
+        watering.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intToMain = new Intent(MainActivity.this, Watering.class);
                 startActivity(intToMain);
             }
         });
