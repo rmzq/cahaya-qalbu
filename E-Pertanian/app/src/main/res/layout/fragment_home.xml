@@ -55,6 +55,7 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/irigasi"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:background="#AEACAC"

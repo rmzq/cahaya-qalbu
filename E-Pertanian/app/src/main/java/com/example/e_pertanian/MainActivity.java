@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //buat button navigation bar
+
 
         getSupportFragmentManager().beginTransaction().replace(R.id.pager,new HomeFragment()).commit();
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.tapBar);

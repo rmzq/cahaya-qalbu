@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 public class SimpanWaktuTimer {
 
     private SharedPreferences mPreferences; //mendefinisikan sharedPreferences pada aplikasi ini
-    private String sharedPrefFile = "com.example.timer"; //lokasi file sharedPreferences disimpan yang com. itu harus sama kayak nama packagenya
+    private String sharedPrefFile = "com.example.e_pertanian.watering"; //lokasi file sharedPreferences disimpan yang com. itu harus sama kayak nama packagenya
     private Context mContext;
 
     private final String COUNT_JAM = "jam";
@@ -27,7 +27,8 @@ public class SimpanWaktuTimer {
 
     private SimpanWaktuTimer(Context context) {
         mContext = context;
-        mPreferences = mContext.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE);
+//        mPreferences = mContext.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE);
+        mPreferences = mContext.getSharedPreferences(mContext.getPackageName(), Context.MODE_PRIVATE);
     }
 
     public void writeJam(int jam) {
