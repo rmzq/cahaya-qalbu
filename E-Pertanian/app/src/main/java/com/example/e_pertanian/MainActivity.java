@@ -39,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return;
         }
-        String email = user.getEmail();
-        buatuser = findViewById(R.id.userDis);
-        buatuser.setText(email);
+        //String email = user.getEmail();
+        //buatuser = findViewById(R.id.userDis);
+        //buatuser.setText(email);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.pager,new HomeFragment()).commit();
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.tapBar);

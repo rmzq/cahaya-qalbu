@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -26,9 +27,12 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.e_pertanian.Login;
 import com.example.e_pertanian.MainActivity;
 import com.example.e_pertanian.R;
 import com.example.e_pertanian.model.Schedule;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -52,6 +56,7 @@ public class TambahJadwalFragment extends Fragment implements View.OnClickListen
 
     DatabaseReference mDatabase;
 
+    FirebaseUser user;
 
     public TambahJadwalFragment() {
         // Required empty public constructor
@@ -65,6 +70,13 @@ public class TambahJadwalFragment extends Fragment implements View.OnClickListen
 
         jadwal = new Schedule();
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            startActivity(new Intent(getActivity(), Login.class));
+            getActivity().finish();
+            return;
+        }
+
         kalender = Calendar.getInstance();
         ettgl = (EditText)getActivity().findViewById(R.id.etTW);
         etWkt = (EditText)getActivity().findViewById((R.id.etWaktu));
@@ -73,6 +85,15 @@ public class TambahJadwalFragment extends Fragment implements View.OnClickListen
         isOto = (CheckBox)getActivity().findViewById(R.id.cbIsAuto);
         simpan = (Button)getActivity().findViewById(R.id.btnTambah);
         batal = (Button)getActivity().findViewById(R.id.btnBatal);
+        batal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ScheduleFragment jadwal = new ScheduleFragment();
+                FragmentTransaction ts = getFragmentManager().beginTransaction();
+                ts.replace(R.id.pager,jadwal);
+                ts.commit();
+            }
+        });
 
         ettgl.setOnClickListener(this);
         etWkt.setOnClickListener(this);
@@ -82,7 +103,7 @@ public class TambahJadwalFragment extends Fragment implements View.OnClickListen
             @Override
             public void onClick(View v) {
                 if (isOto.isChecked()){
-                    Toast.makeText(getActivity(), "tercek", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Otomatis", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -91,7 +112,7 @@ public class TambahJadwalFragment extends Fragment implements View.OnClickListen
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String isi = parent.getItemAtPosition(position).toString();
-                Toast.makeText(getActivity(), isi, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), isi, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -206,7 +227,12 @@ public class TambahJadwalFragment extends Fragment implements View.OnClickListen
             jadwal.setAuto(isAuto);
 
 
-            db.child(id).setValue(jadwal);
+            db.child(user.getUid()).child(id).setValue(jadwal);
+
+            ScheduleFragment jadwal = new ScheduleFragment();
+            FragmentTransaction ts = getFragmentManager().beginTransaction();
+            ts.replace(R.id.pager,jadwal);
+            ts.commit();
         }else {
             Toast.makeText(getActivity(), "tidak tersimpan", Toast.LENGTH_SHORT).show();
         }

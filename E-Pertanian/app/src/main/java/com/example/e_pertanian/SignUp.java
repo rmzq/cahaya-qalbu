@@ -93,6 +93,7 @@ public class SignUp extends AppCompatActivity {
                     //FirebaseUser user = mFirebaseAuth.getCurrentUser();
                 }
                 else {
+                    finish();
                     startActivity(new Intent(SignUp.this,MainActivity.class));
                 }
             }
