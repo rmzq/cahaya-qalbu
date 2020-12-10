@@ -2,6 +2,7 @@ package com.example.e_pertanian.fragments;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,10 +20,13 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.e_pertanian.Login;
 import com.example.e_pertanian.MainActivity;
 import com.example.e_pertanian.R;
 import com.example.e_pertanian.schedule.SchedulingActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -45,6 +49,13 @@ public class ScheduleFragment extends Fragment  {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            startActivity(new Intent(getActivity(), Login.class));
+            getActivity().finish();
+            return;
+        }
 
 
         /* starts before 1 month from now */

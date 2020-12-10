@@ -50,7 +50,9 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 Intent intToMain = new Intent(getActivity(), Login.class);
+                getActivity().finish();
                 startActivity(intToMain);
+
             }
         });
 

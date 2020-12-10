@@ -6,248 +6,260 @@
     android:padding="16dp"
     tools:context=".fragments.HomeFragment">
 
-    <TextView
-        android:id="@+id/judul"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Beranda"
-        android:textColor="#01AA4F"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="10dp"/>
-
-    <Button
-        android:layout_below="@id/judul"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnLogout"
-        android:text="Logout"/>
-
-    <LinearLayout
-        android:id="@+id/baris1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/btnLogout">
-
-        <FrameLayout
-            android:id="@+id/watering"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="#AEACAC"
-            android:padding="10dp">
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/watering" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/judul"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:layout_marginTop="5dp"
-                android:text="Watering"
-                android:textColor="#484040"
-                android:textSize="20sp" />
-        </FrameLayout>
+                android:text="Beranda"
+                android:textColor="#01AA4F"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
 
-        <FrameLayout
-            android:id="@+id/irigasi"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="#AEACAC"
-            android:padding="10dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginStart="40dp">
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/irigasi" />
-
-            <TextView
+            <Button
+                android:layout_below="@id/judul"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:layout_marginTop="5dp"
-                android:text="Irigasi"
-                android:textColor="#484040"
-                android:textSize="20sp" />
-        </FrameLayout>
+                android:id="@+id/btnLogout"
+                android:text="Logout"/>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/baris2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:layout_below="@id/baris1"
-        >
-
-        <FrameLayout
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="#AEACAC"
-            android:padding="10dp">
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/sprinkler" />
-
-            <TextView
+            <LinearLayout
+                android:id="@+id/baris1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:layout_marginTop="5dp"
-                android:text="Sprinkler"
-                android:textColor="#484040"
-                android:textSize="20sp" />
-        </FrameLayout>
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/btnLogout">
 
-        <FrameLayout
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="#AEACAC"
-            android:padding="10dp"
-            android:layout_marginLeft="40dp">
+                <FrameLayout
+                    android:id="@+id/watering"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:background="#AEACAC"
+                    android:padding="10dp">
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/measuring" />
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/watering" />
 
-            <TextView
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginTop="5dp"
+                        android:text="Watering"
+                        android:textColor="#484040"
+                        android:textSize="20sp" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/irigasi"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:background="#AEACAC"
+                    android:padding="10dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginStart="40dp">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/irigasi" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginTop="5dp"
+                        android:text="Irigasi"
+                        android:textColor="#484040"
+                        android:textSize="20sp" />
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/baris2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:layout_marginTop="5dp"
-                android:text="Measure"
-                android:textColor="#484040"
-                android:textSize="20sp" />
-        </FrameLayout>
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:layout_below="@id/baris1"
+                >
 
-    </LinearLayout>
+                <FrameLayout
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:background="#AEACAC"
+                    android:padding="10dp">
 
-    <LinearLayout
-        android:id="@+id/baris3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_below="@id/baris2"
-        android:layout_centerHorizontal="true"
-        >
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/sprinkler" />
 
-        <FrameLayout
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="#AEACAC"
-            android:padding="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginTop="5dp"
+                        android:text="Sprinkler"
+                        android:textColor="#484040"
+                        android:textSize="20sp" />
+                </FrameLayout>
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/weather" />
+                <FrameLayout
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:background="#AEACAC"
+                    android:padding="10dp"
+                    android:layout_marginLeft="40dp">
 
-            <TextView
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/measuring" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginTop="5dp"
+                        android:text="Measure"
+                        android:textColor="#484040"
+                        android:textSize="20sp" />
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/baris3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:layout_marginTop="5dp"
-                android:text="Weather"
-                android:textColor="#484040"
-                android:textSize="20sp" />
-        </FrameLayout>
+                android:layout_marginTop="40dp"
+                android:layout_below="@id/baris2"
+                android:layout_centerHorizontal="true"
+                >
 
-        <FrameLayout
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="#AEACAC"
-            android:padding="10dp"
-            android:layout_marginLeft="40dp"
-            android:id="@+id/scheduling">
+                <FrameLayout
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:background="#AEACAC"
+                    android:padding="10dp">
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/scheduling" />
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/weather" />
 
-            <TextView
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginTop="5dp"
+                        android:text="Weather"
+                        android:textColor="#484040"
+                        android:textSize="20sp" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:background="#AEACAC"
+                    android:padding="10dp"
+                    android:layout_marginLeft="40dp"
+                    android:id="@+id/scheduling">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/scheduling" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginTop="5dp"
+                        android:text="Scheduling"
+                        android:textColor="#484040"
+                        android:textSize="20sp" />
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/baris4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:layout_marginTop="5dp"
-                android:text="Scheduling"
-                android:textColor="#484040"
-                android:textSize="20sp" />
-        </FrameLayout>
+                android:layout_marginTop="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/baris3"
+                >
 
-    </LinearLayout>
+                <FrameLayout
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:background="#AEACAC"
+                    android:padding="10dp">
 
-    <LinearLayout
-        android:id="@+id/baris4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/baris3"
-        >
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/chat2" />
 
-        <FrameLayout
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="#AEACAC"
-            android:padding="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginTop="5dp"
+                        android:text="Chat"
+                        android:textColor="#484040"
+                        android:textSize="20sp" />
+                </FrameLayout>
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/chat2" />
+                <FrameLayout
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:background="#AEACAC"
+                    android:padding="10dp"
+                    android:layout_marginLeft="40dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:layout_marginTop="5dp"
-                android:text="Chat"
-                android:textColor="#484040"
-                android:textSize="20sp" />
-        </FrameLayout>
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/note" />
 
-        <FrameLayout
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="#AEACAC"
-            android:padding="10dp"
-            android:layout_marginLeft="40dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginTop="5dp"
+                        android:text="Note"
+                        android:textColor="#484040"
+                        android:textSize="20sp" />
+                </FrameLayout>
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/note" />
+            </LinearLayout>
+        </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:layout_marginTop="5dp"
-                android:text="Note"
-                android:textColor="#484040"
-                android:textSize="20sp" />
-        </FrameLayout>
+    </ScrollView>
 
-    </LinearLayout>
 
 </RelativeLayout>
