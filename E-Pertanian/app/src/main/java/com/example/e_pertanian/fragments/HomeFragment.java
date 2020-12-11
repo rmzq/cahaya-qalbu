@@ -18,6 +18,7 @@ import android.widget.FrameLayout;
 import com.example.e_pertanian.Login;
 import com.example.e_pertanian.MainActivity;
 import com.example.e_pertanian.R;
+import com.example.e_pertanian.grafik.Grafik;
 import com.example.e_pertanian.model.Schedule;
 import com.example.e_pertanian.note.Notes;
 import com.example.e_pertanian.schedule.SchedulingActivity;
@@ -29,7 +30,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class HomeFragment extends Fragment {
 
     Button btnLogout;
-    FrameLayout schedule, watering,irigasi, weather, notes;
+    FrameLayout schedule, watering,irigasi, weather, notes, grafik;
     FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
@@ -47,6 +48,7 @@ public class HomeFragment extends Fragment {
         irigasi = (FrameLayout)getActivity().findViewById(R.id.irigasi);
         weather = (FrameLayout)getActivity().findViewById(R.id.weather);
         notes = (FrameLayout)getActivity().findViewById(R.id.notes);
+        grafik = (FrameLayout)getActivity().findViewById(R.id.grafik);
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +99,14 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intToMain = new Intent(getActivity(), Notes.class);
+                startActivity(intToMain);
+            }
+        });
+
+        grafik.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intToMain = new Intent(getActivity(), Grafik.class);
                 startActivity(intToMain);
             }
         });

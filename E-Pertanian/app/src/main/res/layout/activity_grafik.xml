@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".grafik.Grafik">
+
+    <EditText
+        android:id="@+id/editTextX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Masukkan Bulan"
+        android:inputType="number"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="14dp" />
+
+    <EditText
+        android:id="@+id/editTextY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/editTextX"
+        android:layout_marginTop="72dp"
+        android:ems="10"
+        android:hint="Masukkan Hasil Panen"
+        android:inputType="number"
+        android:layout_alignLeft="@+id/editTextX" />
+
+    <Button
+        android:id="@+id/btnInsert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="35dp"
+        android:layout_alignTop="@+id/editTextX"
+        android:text="Input"
+        android:layout_alignParentRight="true" />
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/editTextY"
+        android:id="@+id/Linechart">
+    </com.github.mikephil.charting.charts.LineChart>
+
+</RelativeLayout>
