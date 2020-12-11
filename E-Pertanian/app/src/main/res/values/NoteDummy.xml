@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_placeholder">Title</string>
+    <string name="note_placeholder">Note</string>
+    <string name="notes_info_placeholder">Here is some notes</string>
+
+    <string-array name="notes_titles">
+        <item>Daftar barang yang harus dibeli</item>
+        <item>Harga tanaman bulan september</item>
+        <item>Jadwal piket</item>
+        <item>Obat tanaman</item>
+        <item>Website Referensi</item>
+        <item>Dear diary..</item>
+    </string-array>
+
+
+    <string-array name="notes_info">
+        <item>Telur, daging, susu,...</item>
+        <item>Cabe - Rp. 9000/kg</item>
+        <item>Sehun, Chanyeol</item>
+        <item>Kalsium</item>
+        <item>yustinayasin.wordpress.com</item>
+        <item>Capek bos</item>
+    </string-array>
+</resources>

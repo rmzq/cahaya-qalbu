@@ -261,7 +261,8 @@
                         android:layout_height="150dp"
                         android:background="#AEACAC"
                         android:padding="10dp"
-                        android:layout_marginLeft="40dp">
+                        android:layout_marginLeft="40dp"
+                        android:id="@+id/note">
 
                         <ImageView
                             android:layout_width="100dp"
