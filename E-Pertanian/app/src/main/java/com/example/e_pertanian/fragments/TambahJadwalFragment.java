@@ -178,7 +178,7 @@ public class TambahJadwalFragment extends Fragment implements View.OnClickListen
     }
 
     private void savejadwal(){
-        String jenisK =  jensiKegiatan.getSelectedItem().toString().trim();
+        Long jenisK =  jensiKegiatan.getSelectedItemId();
         String tanggal = ettgl.getText().toString().trim();
         String waktu = etWkt.getText().toString().trim();
         String lama = etLm.getText().toString().trim();

@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.e_pertanian.Login;
 import com.example.e_pertanian.R;
@@ -57,11 +59,13 @@ public class ScheduleFragment extends Fragment  {
     private LinearLayoutManager linearLayoutManager;
     private FirebaseRecyclerAdapter adapter;
 
+
+
     public class scheduleHolder extends RecyclerView.ViewHolder{
 
         TextView waktu;
         TextView jenisKegiatan, isAuto;
-
+        CardView cvpjdl;
         public TextView lama;
 
         public scheduleHolder(@NonNull View itemView) {
@@ -70,6 +74,7 @@ public class ScheduleFragment extends Fragment  {
             waktu = (TextView)itemView.findViewById(R.id.jamItem);
             jenisKegiatan = (TextView)itemView.findViewById(R.id.JenisKgtn);
             isAuto = (TextView)itemView.findViewById(R.id.tvOtomatis);
+            cvpjdl = (CardView)itemView.findViewById(R.id.cardPjdl);
 
         }
 
@@ -81,8 +86,9 @@ public class ScheduleFragment extends Fragment  {
             waktu.setText(string);
         }
 
-        public void setJenisKegiatan(String string) {
-            jenisKegiatan.setText(string);
+        public void setJenisKegiatan(Long id) {
+            String[] jenisKG = getResources().getStringArray(R.array.daftar_kegiatan);
+            jenisKegiatan.setText(jenisKG[id.intValue()]);
         }
 
         public void setIsAuto(boolean s) {
@@ -145,12 +151,15 @@ public class ScheduleFragment extends Fragment  {
 
         //baca data dan nampilin
         //dbJadwal = FirebaseDatabase.getInstance().getReference("jadwal").child(user.getUid()).child("MOBLTUgNyueyw_mRFqI");
+
         jadwalRecylerView = (RecyclerView)getActivity().findViewById(R.id.rvBuatJadwal);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         jadwalRecylerView.setLayoutManager(linearLayoutManager);
         jadwalRecylerView.setHasFixedSize(true);
         fetch();
         dbJadwal = FirebaseDatabase.getInstance().getReference();
+
+
 
     }
 
@@ -162,7 +171,7 @@ public class ScheduleFragment extends Fragment  {
             @Override
             public Schedule parseSnapshot(@NonNull DataSnapshot snapshot) {
                 return new Schedule(snapshot.child("id").getValue().toString(),
-                        snapshot.child("jenisKg").getValue().toString(),
+                        (Long) snapshot.child("jenisKg").getValue(),
                         snapshot.child("tanggal").getValue().toString(),
                         snapshot.child("waktu").getValue().toString(),
                         snapshot.child("lama").getValue().toString(),
@@ -185,6 +194,28 @@ public class ScheduleFragment extends Fragment  {
                 holder.setWaktu(model.getWaktu());
                 holder.setJenisKegiatan(model.getJenisKg());
                 holder.setIsAuto(model.isAuto());
+
+                holder.cvpjdl.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getActivity(),String.valueOf(position), Toast.LENGTH_SHORT).show();
+
+                        UpdateScheduleFragment updateJadwal = new UpdateScheduleFragment();
+                        Bundle bundle = new Bundle();
+
+                        bundle.putString("waktu",model.getWaktu());
+                        bundle.putString("tanggal",model.getTanggal());
+                        bundle.putInt("jenis",model.getJenisKg().intValue());
+                        bundle.putString("lama",model.getLama());
+                        bundle.putBoolean("otomatis",model.isAuto());
+                        updateJadwal.setArguments(bundle);
+
+                        FragmentTransaction ts = getFragmentManager().beginTransaction();
+                        ts.replace(R.id.pager,updateJadwal);
+                        ts.commit();
+
+                    }
+                });
             }
         };
         jadwalRecylerView.setAdapter(adapter);
@@ -198,6 +229,7 @@ public class ScheduleFragment extends Fragment  {
         return vii;
     }
 
+
     @Override
     public void onStart() {
         super.onStart();
@@ -209,4 +241,6 @@ public class ScheduleFragment extends Fragment  {
         super.onStop();
         adapter.startListening();
     }
+
+
 }

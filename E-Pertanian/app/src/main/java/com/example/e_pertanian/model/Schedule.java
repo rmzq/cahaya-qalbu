@@ -5,13 +5,13 @@ import android.os.Parcelable;
 
 public class Schedule{
     String id;
-    String jenisKg;
+    Long jenisKg;
     String tanggal;
     String waktu;
     String lama;
     boolean isAuto;
 
-    public Schedule(String id, String jenisKg, String tanggal, String waktu, String lama, boolean isAuto) {
+    public Schedule(String id, Long jenisKg, String tanggal, String waktu, String lama, boolean isAuto) {
         this.id = id;
         this.jenisKg = jenisKg;
         this.tanggal = tanggal;
@@ -20,9 +20,7 @@ public class Schedule{
         this.isAuto = isAuto;
     }
 
-    public Schedule(){
-
-    }
+    public Schedule(){}
 
     public String getId() {
         return id;
@@ -32,11 +30,11 @@ public class Schedule{
         this.id = id;
     }
 
-    public String getJenisKg() {
+    public Long getJenisKg() {
         return jenisKg;
     }
 
-    public void setJenisKg(String jenisKg) {
+    public void setJenisKg(Long jenisKg) {
         this.jenisKg = jenisKg;
     }
 
