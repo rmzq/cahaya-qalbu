@@ -78,6 +78,7 @@ public class Login extends AppCompatActivity {
                             }
                             else{
                                 Intent i = new Intent(Login.this,MainActivity.class);
+                                finish();
                                 startActivity(i);
                             }
                         }
@@ -93,6 +94,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(Login.this, SignUp.class);
+                finish();
                 startActivity(intent);
             }
         });

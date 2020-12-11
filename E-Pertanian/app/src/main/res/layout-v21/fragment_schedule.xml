@@ -34,27 +34,40 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ScrollView
+    <TextView
+        android:id="@+id/tvjam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jam"
+        android:textSize="18sp"
+        android:layout_marginStart="20dp"
+        android:textColor="@color/Third_text"
+        android:layout_below="@id/appbar"/>
+
+    <TextView
+        android:id="@+id/tvJadwal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Penjadwalan"
+        android:textSize="18sp"
+        android:layout_alignTop="@id/tvjam"
+        android:layout_toEndOf="@id/tvjam"
+        android:layout_marginStart="82dp"
+        android:textColor="@color/Third_text"
+        android:layout_below="@id/appbar"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvBuatJadwal"
+        android:layout_below="@id/tvjam"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@id/appbar">
-
-
-        <TextView
-            android:id="@+id/tangalWaktu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="tanggal"
-            />
-
-    </ScrollView>
+        android:layout_height="fill_parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btntambahJadwal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
         android:src="@drawable/ic_tambah"

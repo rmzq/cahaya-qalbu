@@ -7,6 +7,14 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
+    <!--
+    <TextView
+        android:id="@+id/userDis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="liat email"/>
+        -->
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cv"
         android:layout_width="match_parent"
@@ -30,6 +38,7 @@
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
+
         android:layout_above="@id/cv"
         android:paddingTop="30dp"
         android:paddingBottom="30dp"
