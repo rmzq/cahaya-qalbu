@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    >
+
+    <RelativeLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_card"
+        android:elevation="5dp"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/title"
+            android:text="@string/notes_title"
+            android:background="@drawable/custom_card_title"
+            android:paddingTop="50dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/subTitle"
+            android:text="@string/notes_sub_title"
+            android:padding="8dp"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_below="@+id/title"
+            android:textColor="?android:textColorSecondary"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/description"
+            android:text="@string/notes_desc"
+            android:padding="8dp"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_below="@+id/subTitle"
+            />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

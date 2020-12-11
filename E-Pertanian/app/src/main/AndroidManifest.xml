@@ -13,15 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".note.AddNoteActivity"></activity>
+        <activity android:name=".note.Notes" />
         <activity android:name=".irigasi.IrigasiPause" />
         <activity android:name=".irigasi.Irigasi" />
         <activity android:name=".watering.WateringPause" />
         <activity android:name=".watering.Watering" />
-        <activity android:name=".weather.weather"/>
-        <activity android:name=".Login">
-
-
-        </activity>
+        <activity android:name=".weather.weather" />
+        <activity android:name=".Login" />
         <activity android:name=".SignUp" />
         <activity
             android:name=".schedule.SchedulingActivity"
@@ -34,7 +33,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 
