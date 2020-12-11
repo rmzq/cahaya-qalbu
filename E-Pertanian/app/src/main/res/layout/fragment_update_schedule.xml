@@ -50,6 +50,7 @@
         android:layout_height="wrap_content"
         android:hint="Pilih tanggal.."
         android:clickable="true"
+        android:focusable="false"
         android:editable="false"
         android:layout_below="@id/tvtgl" />
 
@@ -69,6 +70,7 @@
         android:layout_height="wrap_content"
         android:hint="Pilih waktu.."
         android:clickable="true"
+        android:focusable="false"
         android:editable="false"
         android:layout_below="@id/tvWaktu" />
 

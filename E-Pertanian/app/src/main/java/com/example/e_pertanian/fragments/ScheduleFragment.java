@@ -203,6 +203,7 @@ public class ScheduleFragment extends Fragment  {
                         UpdateScheduleFragment updateJadwal = new UpdateScheduleFragment();
                         Bundle bundle = new Bundle();
 
+                        bundle.putString("id jadwal",model.getId());
                         bundle.putString("waktu",model.getWaktu());
                         bundle.putString("tanggal",model.getTanggal());
                         bundle.putInt("jenis",model.getJenisKg().intValue());
@@ -213,7 +214,6 @@ public class ScheduleFragment extends Fragment  {
                         FragmentTransaction ts = getFragmentManager().beginTransaction();
                         ts.replace(R.id.pager,updateJadwal);
                         ts.commit();
-
                     }
                 });
             }
