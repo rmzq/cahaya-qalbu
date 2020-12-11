@@ -3,37 +3,24 @@ package com.example.e_pertanian.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Schedule implements Parcelable {
+public class Schedule{
     String id;
     Long jenisKg;
     String tanggal;
     String waktu;
-    Long lama;
+    String lama;
     boolean isAuto;
 
-    public Schedule() {
+    public Schedule(String id, Long jenisKg, String tanggal, String waktu, String lama, boolean isAuto) {
+        this.id = id;
+        this.jenisKg = jenisKg;
+        this.tanggal = tanggal;
+        this.waktu = waktu;
+        this.lama = lama;
+        this.isAuto = isAuto;
     }
 
-    protected Schedule(Parcel in) {
-        id = in.readString();
-        jenisKg = in.readLong();
-        tanggal = in.readString();
-        waktu = in.readString();
-        lama = in.readLong();
-        isAuto = in.readByte() != 0;
-    }
-
-    public static final Creator<Schedule> CREATOR = new Creator<Schedule>() {
-        @Override
-        public Schedule createFromParcel(Parcel in) {
-            return new Schedule(in);
-        }
-
-        @Override
-        public Schedule[] newArray(int size) {
-            return new Schedule[size];
-        }
-    };
+    public Schedule(){}
 
     public String getId() {
         return id;
@@ -67,11 +54,11 @@ public class Schedule implements Parcelable {
         this.waktu = waktu;
     }
 
-    public Long getLama() {
+    public String getLama() {
         return lama;
     }
 
-    public void setLama(Long lama) {
+    public void setLama(String lama) {
         this.lama = lama;
     }
 
@@ -81,20 +68,5 @@ public class Schedule implements Parcelable {
 
     public void setAuto(boolean auto) {
         isAuto = auto;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
-        dest.writeLong(jenisKg);
-        dest.writeString(tanggal);
-        dest.writeString(waktu);
-        dest.writeLong(lama);
-        dest.writeByte((byte) (isAuto ? 1 : 0));
     }
 }

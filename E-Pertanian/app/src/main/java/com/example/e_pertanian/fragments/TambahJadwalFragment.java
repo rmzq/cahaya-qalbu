@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -26,9 +27,12 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.e_pertanian.Login;
 import com.example.e_pertanian.MainActivity;
 import com.example.e_pertanian.R;
 import com.example.e_pertanian.model.Schedule;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -52,6 +56,7 @@ public class TambahJadwalFragment extends Fragment implements View.OnClickListen
 
     DatabaseReference mDatabase;
 
+    FirebaseUser user;
 
     public TambahJadwalFragment() {
         // Required empty public constructor
@@ -65,6 +70,13 @@ public class TambahJadwalFragment extends Fragment implements View.OnClickListen
 
         jadwal = new Schedule();
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            startActivity(new Intent(getActivity(), Login.class));
+            getActivity().finish();
+            return;
+        }
+
         kalender = Calendar.getInstance();
         ettgl = (EditText)getActivity().findViewById(R.id.etTW);
         etWkt = (EditText)getActivity().findViewById((R.id.etWaktu));
@@ -72,6 +84,16 @@ public class TambahJadwalFragment extends Fragment implements View.OnClickListen
         jensiKegiatan = (Spinner)getActivity().findViewById(R.id.spJK);
         isOto = (CheckBox)getActivity().findViewById(R.id.cbIsAuto);
         simpan = (Button)getActivity().findViewById(R.id.btnTambah);
+        batal = (Button)getActivity().findViewById(R.id.btnBatal);
+        batal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ScheduleFragment jadwal = new ScheduleFragment();
+                FragmentTransaction ts = getFragmentManager().beginTransaction();
+                ts.replace(R.id.pager,jadwal);
+                ts.commit();
+            }
+        });
 
         ettgl.setOnClickListener(this);
         etWkt.setOnClickListener(this);
@@ -81,7 +103,7 @@ public class TambahJadwalFragment extends Fragment implements View.OnClickListen
             @Override
             public void onClick(View v) {
                 if (isOto.isChecked()){
-                    Toast.makeText(getActivity(), "tercek", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Otomatis", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -89,8 +111,8 @@ public class TambahJadwalFragment extends Fragment implements View.OnClickListen
         jensiKegiatan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                int jenisKg = parent.getSelectedItemPosition();
-                Toast.makeText(getActivity(), String.valueOf(jenisKg), Toast.LENGTH_SHORT).show();
+                String isi = parent.getItemAtPosition(position).toString();
+                //Toast.makeText(getActivity(), isi, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -156,53 +178,63 @@ public class TambahJadwalFragment extends Fragment implements View.OnClickListen
     }
 
     private void savejadwal(){
-        int jenisK = (int) jensiKegiatan.getSelectedItemId();
+        Long jenisK =  jensiKegiatan.getSelectedItemId();
         String tanggal = ettgl.getText().toString().trim();
         String waktu = etWkt.getText().toString().trim();
-        int lama = Integer.parseInt(etLm.getText().toString());
+        String lama = etLm.getText().toString().trim();
         boolean isAuto = isOto.isChecked();
 
-        boolean kosong = false;
+        boolean isEmptyFields = false;
 
-        /*
+
         if (TextUtils.isEmpty(tanggal)){
-            kosong = true;
-            ettgl.setError("Ini tidak boleh kosong");
+            isEmptyFields = true;
+            ettgl.setError("Field ini tidak boleh kosong");
         }
 
+
         if (TextUtils.isEmpty(waktu)){
-            kosong = true;
+            isEmptyFields = true;
             etWkt.setError("Ini tidak boleh kosong");
         }
 
-        if (TextUtils.isEmpty(String.valueOf(lama))){
-            kosong = true;
+
+        if (TextUtils.isEmpty(lama)){
+            isEmptyFields = true;
             etLm.setError("Ini tidak boleh kosong");
         }
 
+        /*
         if (TextUtils.isEmpty(String.valueOf(jenisK))){
-            kosong = true;
+            isEmptyFields = true;
             TextView errorText = (TextView)jensiKegiatan.getSelectedView();
             errorText.setError("Ini tidak boleh kosong");
         }
 
          */
 
-        DatabaseReference db = mDatabase.child("jadwal");
-        Toast.makeText(getActivity(), "simpan jadwal", Toast.LENGTH_SHORT).show();
+        if (!isEmptyFields){
+            DatabaseReference db = mDatabase.child("jadwal");
+            Toast.makeText(getActivity(), "Jadwal tersimpan", Toast.LENGTH_SHORT).show();
 
-        String id = db.push().getKey();
-        jadwal.setId(id);
-        jadwal.setTanggal(tanggal);
-        jadwal.setWaktu(waktu);
-        jadwal.setAuto(true);
-        jadwal.setJenisKg((long) jenisK);
-        jadwal.setLama((long) lama);
-        jadwal.setAuto(isAuto);
+            String id = db.push().getKey();
+            jadwal.setId(id);
+            jadwal.setTanggal(tanggal);
+            jadwal.setWaktu(waktu);
+            jadwal.setAuto(isAuto);
+            jadwal.setJenisKg(jenisK);
+            jadwal.setLama(lama);
+            jadwal.setAuto(isAuto);
 
 
-        db.child(id).setValue(jadwal);
-        if (!kosong){
+            db.child(user.getUid()).child(id).setValue(jadwal);
+
+            ScheduleFragment jadwal = new ScheduleFragment();
+            FragmentTransaction ts = getFragmentManager().beginTransaction();
+            ts.replace(R.id.pager,jadwal);
+            ts.commit();
+        }else {
+            Toast.makeText(getActivity(), "tidak tersimpan", Toast.LENGTH_SHORT).show();
         }
     }
 }
