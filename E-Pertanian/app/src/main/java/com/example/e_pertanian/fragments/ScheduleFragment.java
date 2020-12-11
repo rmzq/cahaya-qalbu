@@ -13,10 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,12 +64,14 @@ public class ScheduleFragment extends Fragment  {
 
 
 
+
     public class scheduleHolder extends RecyclerView.ViewHolder{
 
         TextView waktu;
         TextView jenisKegiatan, isAuto;
         CardView cvpjdl;
         public TextView lama;
+        ImageButton ibMenu;
 
         public scheduleHolder(@NonNull View itemView) {
             super(itemView);
@@ -75,7 +80,7 @@ public class ScheduleFragment extends Fragment  {
             jenisKegiatan = (TextView)itemView.findViewById(R.id.JenisKgtn);
             isAuto = (TextView)itemView.findViewById(R.id.tvOtomatis);
             cvpjdl = (CardView)itemView.findViewById(R.id.cardPjdl);
-
+            ibMenu = (ImageButton)itemView.findViewById(R.id.ibMenu);
         }
 
         public void setLama(String string) {
@@ -195,25 +200,43 @@ public class ScheduleFragment extends Fragment  {
                 holder.setJenisKegiatan(model.getJenisKg());
                 holder.setIsAuto(model.isAuto());
 
-                holder.cvpjdl.setOnClickListener(new OnClickListener() {
+                holder.ibMenu.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getActivity(),String.valueOf(position), Toast.LENGTH_SHORT).show();
+                        PopupMenu popupMenu = new PopupMenu(getActivity(),holder.ibMenu);
+                        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                            @Override
+                            public boolean onMenuItemClick(MenuItem item) {
+                                switch (item.getItemId()){
+                                    case R.id.menuEdit:
+                                        //Toast.makeText(getActivity(),String.valueOf(position), Toast.LENGTH_SHORT).show();
 
-                        UpdateScheduleFragment updateJadwal = new UpdateScheduleFragment();
-                        Bundle bundle = new Bundle();
+                                        UpdateScheduleFragment updateJadwal = new UpdateScheduleFragment();
+                                        Bundle bundle = new Bundle();
 
-                        bundle.putString("id jadwal",model.getId());
-                        bundle.putString("waktu",model.getWaktu());
-                        bundle.putString("tanggal",model.getTanggal());
-                        bundle.putInt("jenis",model.getJenisKg().intValue());
-                        bundle.putString("lama",model.getLama());
-                        bundle.putBoolean("otomatis",model.isAuto());
-                        updateJadwal.setArguments(bundle);
+                                        bundle.putString("id jadwal",model.getId());
+                                        bundle.putString("waktu",model.getWaktu());
+                                        bundle.putString("tanggal",model.getTanggal());
+                                        bundle.putInt("jenis",model.getJenisKg().intValue());
+                                        bundle.putString("lama",model.getLama());
+                                        bundle.putBoolean("otomatis",model.isAuto());
+                                        updateJadwal.setArguments(bundle);
 
-                        FragmentTransaction ts = getFragmentManager().beginTransaction();
-                        ts.replace(R.id.pager,updateJadwal);
-                        ts.commit();
+                                        FragmentTransaction ts = getFragmentManager().beginTransaction();
+                                        ts.replace(R.id.pager,updateJadwal);
+                                        ts.commit();
+                                        break;
+                                    case R.id.menuHapus:
+                                        DatabaseReference db = dbJadwal.child("jadwal").child(user.getUid()).child(model.getId());
+                                        db.removeValue();
+                                        Toast.makeText(getActivity(), "Delete data...", Toast.LENGTH_SHORT).show();
+                                        break;
+                                }
+                                return false;
+                            }
+                        });
+                        popupMenu.inflate(R.menu.menu);
+                        popupMenu.show();
                     }
                 });
             }
