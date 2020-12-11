@@ -17,6 +17,7 @@
         <activity android:name=".irigasi.Irigasi" />
         <activity android:name=".watering.WateringPause" />
         <activity android:name=".watering.Watering" />
+        <activity android:name=".weather.weather"/>
         <activity android:name=".Login">
 
 
