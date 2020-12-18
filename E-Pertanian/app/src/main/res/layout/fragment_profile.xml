@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!--
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Light"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="24dp">
+    </androidx.cardview.widget.CardView>
+    -->
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/hiU"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hi! "
+        android:textSize="48dp"/>
+    <TextView
+        android:id="@+id/tvNama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nama anda"
+        android:textSize="24dp"
+        android:gravity="center"
+        android:layout_alignBottom="@id/hiU"
+        android:layout_alignTop="@id/hiU"
+        android:layout_toEndOf="@id/hiU"
+        android:layout_toRightOf="@id/hiU" />
+
+
+
+</RelativeLayout>

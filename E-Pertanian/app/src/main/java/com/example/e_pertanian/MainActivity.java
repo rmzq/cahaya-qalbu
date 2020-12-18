@@ -15,7 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.e_pertanian.fragments.ChatFragment;
 import com.example.e_pertanian.fragments.HomeFragment;
+import com.example.e_pertanian.fragments.ProfileFragment;
 import com.example.e_pertanian.fragments.ScheduleFragment;
 import com.example.e_pertanian.schedule.SchedulingActivity;
 import com.example.e_pertanian.watering.Watering;
@@ -76,9 +78,12 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.navChat:
                         Toast.makeText(MainActivity.this, "chat", Toast.LENGTH_SHORT).show();
+                        selectedFragment = new ChatFragment();
                         break;
                     case R.id.navProfile:
                         Toast.makeText(MainActivity.this, "profile", Toast.LENGTH_SHORT).show();
+                        selectedFragment= new ProfileFragment();
+                        break;
                     default: selectedFragment = null;
                 }
 
