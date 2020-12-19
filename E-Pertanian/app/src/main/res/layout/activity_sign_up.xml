@@ -47,9 +47,10 @@
         app:layout_constraintVertical_bias="0.181" />
 
     <TextView
+        android:elevation="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Selamat \n Datang Kembali"
+        android:text="Selamat \nDatang Kembali"
         android:textColor="#01AA4F"
         android:textSize="26sp"
         android:textStyle="bold"
@@ -61,6 +62,7 @@
         app:layout_constraintVertical_bias="0.178" />
 
     <ImageView
+        android:elevation="5dp"
         android:id="@+id/ivLockLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
