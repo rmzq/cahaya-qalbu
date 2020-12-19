@@ -21,6 +21,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,6 +69,7 @@ public class ScheduleFragment extends Fragment  {
     private LinearLayoutManager linearLayoutManager;
     private FirebaseRecyclerAdapter adapter;
 
+    ProgressBar progressBar;
 
 
 
@@ -118,6 +120,8 @@ public class ScheduleFragment extends Fragment  {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        progressBar = (ProgressBar)getActivity().findViewById(R.id.progressBar);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
@@ -192,15 +196,31 @@ public class ScheduleFragment extends Fragment  {
             }
         });
 
+        dbJadwal.child("jadwal").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.exists()){
+                    progressBar.setVisibility(INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     private void fetch() {
         Query query = FirebaseDatabase.getInstance().getReference().child("jadwal").child(user.getUid());
 
+
         FirebaseRecyclerOptions<Schedule> options = new FirebaseRecyclerOptions.Builder<Schedule>().setQuery(query, new SnapshotParser<Schedule>() {
             @NonNull
             @Override
             public Schedule parseSnapshot(@NonNull DataSnapshot snapshot) {
+
                 return new Schedule(snapshot.child("id").getValue().toString(),
                         (Long) snapshot.child("jenisKg").getValue(),
                         snapshot.child("tanggal").getValue().toString(),
@@ -210,7 +230,10 @@ public class ScheduleFragment extends Fragment  {
             }
         }).build();
 
+
+
         adapter = new FirebaseRecyclerAdapter<Schedule, scheduleHolder>(options) {
+
             @NonNull
             @Override
             public scheduleHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -221,6 +244,8 @@ public class ScheduleFragment extends Fragment  {
 
             @Override
             protected void onBindViewHolder(@NonNull scheduleHolder holder, int position, @NonNull Schedule model) {
+                progressBar.setVisibility(INVISIBLE);
+
                 holder.setLama(model.getLama());
                 holder.setWaktu(model.getWaktu());
                 holder.setJenisKegiatan(model.getJenisKg());
