@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".irigasi.IrigasiPause">
+    tools:context=".sprinkler.SprinklerPause">
+
+
 
     <TextView
         android:id="@+id/textView_countdown"
@@ -46,26 +48,42 @@
         tools:visibility="visible"/>
 
     <ImageView
-        android:id="@+id/imageView_plant1"
+        android:id="@+id/imageView_sprinkler"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_marginTop="180dp"
-        android:src="@drawable/plant1"
+        android:src="@drawable/sprinkler"
         app:layout_constraintBottom_toTopOf="@+id/textView_countdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView_waterdrops"
+        android:id="@+id/imageView_waterMiring"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="180dp"
-        android:src="@drawable/waterdrops"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/imageView_plant1"
+        android:rotation="-20"
+        android:src="@drawable/waterdropsmiring"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toEndOf="@+id/imageView_sprinkler"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.264" />
+
+    <ImageView
+        android:id="@+id/imageView_waterMiring2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:rotation="110"
+        android:src="@drawable/waterdropsmiring"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView_sprinkler"
+        app:layout_constraintHorizontal_bias="0.554"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.264" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".grafik.Grafik"></activity>
+        <activity android:name=".sprinkler.SprinklerPause"></activity>
+        <activity android:name=".sprinkler.Sprinkler" />
+        <activity android:name=".grafik.Grafik" />
         <activity android:name=".note.AddNoteActivity" />
         <activity android:name=".note.Notes" />
         <activity android:name=".irigasi.IrigasiPause" />

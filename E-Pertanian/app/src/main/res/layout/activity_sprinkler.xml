@@ -8,22 +8,22 @@
 
 
     <ImageView
-        android:id="@+id/imageView_plant1"
+        android:id="@+id/imageView_sprinkler"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_marginTop="180dp"
-        android:src="@drawable/plant1"
+        android:src="@drawable/sprinkler"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView_waterdrops"
+        android:id="@+id/imageView_waterMiring"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="180dp"
-        android:src="@drawable/waterdrops"
-        app:layout_constraintBottom_toTopOf="@+id/imageView_plant1"
+        android:src="@drawable/waterdropsmiring"
+        app:layout_constraintBottom_toTopOf="@+id/imageView_sprinkler"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -36,7 +36,7 @@
         android:orientation="horizontal"
         android:padding="16dp"
         tools:ignore="MissingConstraints"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_plant1"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_sprinkler"
         tools:layout_editor_absoluteX="-25dp"
         tools:layout_editor_absoluteY="326dp">
 

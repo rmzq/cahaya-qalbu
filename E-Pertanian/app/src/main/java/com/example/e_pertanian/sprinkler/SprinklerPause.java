@@ -1,4 +1,4 @@
-package com.example.e_pertanian.irigasi;
+package com.example.e_pertanian.sprinkler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,21 +13,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.e_pertanian.R;
-import com.example.e_pertanian.watering.SimpanWaktuTimer;
-import com.example.e_pertanian.watering.Watering;
-import com.example.e_pertanian.watering.WateringPause;
 
 import java.util.Locale;
 
-public class IrigasiPause extends AppCompatActivity {
+public class SprinklerPause extends AppCompatActivity {
 
     private long START_TIME_IN_MILIS;
 
     private TextView countdown;
     private Button pause;
     private Button reset;
-    Animation toPlant;
-    ImageView waterdrops;
+    Animation toPlant, right_animation, left_animation;
+    ImageView waterdrop, waterdrop2;
 
 
     private CountDownTimer timer;
@@ -37,14 +34,17 @@ public class IrigasiPause extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_irigasi_pause);
+        setContentView(R.layout.activity_sprinkler_pause);
 
 
-        START_TIME_IN_MILIS = ((Long.valueOf(SimpanWaktuIrigasi.getInstance(getApplicationContext()).getJam())*60*60) + (Long.valueOf(SimpanWaktuIrigasi.getInstance(getApplicationContext()).getMenit())*60) + Long.valueOf(SimpanWaktuIrigasi.getInstance(getApplicationContext()).getDetik()))*1000;
+        START_TIME_IN_MILIS = ((Long.valueOf(SimpanWaktuSprinkler.getInstance(getApplicationContext()).getJam())*60*60) + (Long.valueOf(SimpanWaktuSprinkler.getInstance(getApplicationContext()).getMenit())*60) + Long.valueOf(SimpanWaktuSprinkler.getInstance(getApplicationContext()).getDetik()))*1000;
         timeLeftMilis = START_TIME_IN_MILIS;
 
         toPlant = AnimationUtils.loadAnimation(this, R.anim.to_plant);
-        waterdrops = findViewById(R.id.imageView_waterdrops);
+        right_animation = AnimationUtils.loadAnimation(this, R.anim.right_animation);
+        left_animation = AnimationUtils.loadAnimation(this, R.anim.left_animation);
+        waterdrop = findViewById(R.id.imageView_waterMiring);
+        waterdrop = findViewById(R.id.imageView_waterMiring2);
 
         countdown = findViewById(R.id.textView_countdown);
         pause = findViewById(R.id.button_jeda);
@@ -74,8 +74,10 @@ public class IrigasiPause extends AppCompatActivity {
     }
 
     private void pauseTimer() {
-        waterdrops.clearAnimation();
-        waterdrops.setVisibility(View.INVISIBLE);
+        waterdrop.clearAnimation();
+        waterdrop.setVisibility(View.INVISIBLE);
+        waterdrop2.clearAnimation();
+        waterdrop2.setVisibility(View.INVISIBLE);
 
         timer.cancel();
         timerRunning = false;
@@ -84,7 +86,8 @@ public class IrigasiPause extends AppCompatActivity {
     }
 
     private void startTimer() {
-        waterdrops.setAnimation(toPlant);
+        waterdrop.setAnimation(right_animation);
+        waterdrop2.setAnimation(left_animation);
         timer = new CountDownTimer(timeLeftMilis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -106,7 +109,7 @@ public class IrigasiPause extends AppCompatActivity {
     }
 
     private void resetTimer() {
-        Intent intent =new Intent(IrigasiPause.this, Watering.class);
+        Intent intent =new Intent(SprinklerPause.this, Sprinkler.class);
         startActivity(intent);
     }
 
