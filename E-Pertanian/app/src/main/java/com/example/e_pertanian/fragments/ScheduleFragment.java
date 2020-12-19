@@ -1,5 +1,6 @@
 package com.example.e_pertanian.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,8 +42,13 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.core.SnapshotHolder;
 
 
+import org.w3c.dom.Text;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
@@ -121,6 +127,29 @@ public class ScheduleFragment extends Fragment  {
         }
 
 
+        TextView tg, hr, bl, th;
+        tg = (TextView)getActivity().findViewById(R.id.tanggal);
+        hr = (TextView)getActivity().findViewById(R.id.hari);
+        bl = (TextView)getActivity().findViewById(R.id.bulan);
+        th = (TextView)getActivity().findViewById(R.id.tahun);
+
+        DateFormat dateFm = new SimpleDateFormat("yyyy-MMM-dd-EEE");
+        String hariIni = dateFm.format(Calendar.getInstance().getTime());
+        String[] bagianTgl = hariIni.split("-");
+
+        tg.setText(bagianTgl[2]);
+        hr.setText(bagianTgl[3]);
+        bl.setText(bagianTgl[1]);
+        th.setText(bagianTgl[0]);
+
+
+        jadwalRecylerView = (RecyclerView)getActivity().findViewById(R.id.rvBuatJadwal);
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        jadwalRecylerView.setLayoutManager(linearLayoutManager);
+        jadwalRecylerView.setHasFixedSize(true);
+        dbJadwal = FirebaseDatabase.getInstance().getReference();
+        fetch();
+
         /* starts before 1 month from now */
         Calendar startDate = Calendar.getInstance();
         startDate.add(Calendar.MONTH, -1);
@@ -137,9 +166,18 @@ public class ScheduleFragment extends Fragment  {
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override
             public void onDateSelected(Calendar date, int position) {
+                //dbJadwal.child("jadwal").child(user.getUid()).child("tanggal");
+                String pilihan = dateFm.format(date.getTime());
+                String[] bagianTgl = pilihan.split("-");
+
+                tg.setText(bagianTgl[2]);
+                hr.setText(bagianTgl[3]);
+                bl.setText(bagianTgl[1]);
+                th.setText(bagianTgl[0]);
 
             }
         });
+
 
         tambahjdwl = (FloatingActionButton)getActivity().findViewById(R.id.btntambahJadwal);
 
@@ -153,18 +191,6 @@ public class ScheduleFragment extends Fragment  {
                 ts.commit();
             }
         });
-
-        //baca data dan nampilin
-        //dbJadwal = FirebaseDatabase.getInstance().getReference("jadwal").child(user.getUid()).child("MOBLTUgNyueyw_mRFqI");
-
-        jadwalRecylerView = (RecyclerView)getActivity().findViewById(R.id.rvBuatJadwal);
-        linearLayoutManager = new LinearLayoutManager(getActivity());
-        jadwalRecylerView.setLayoutManager(linearLayoutManager);
-        jadwalRecylerView.setHasFixedSize(true);
-        fetch();
-        dbJadwal = FirebaseDatabase.getInstance().getReference();
-
-
 
     }
 

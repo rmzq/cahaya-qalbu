@@ -6,6 +6,51 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.ScheduleFragment">
 
+    <TextView
+        android:id="@+id/tanggal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="88"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="12dp"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:textColor="@color/Primariy"/>
+
+    <TextView
+        android:id="@+id/hari"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wed"
+        android:layout_alignTop="@id/tanggal"
+        android:layout_toEndOf="@id/tanggal"
+        android:textStyle="bold"
+        android:textColor="@color/Primariy"
+        android:textSize="24dp"/>
+
+    <TextView
+        android:id="@+id/bulan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jan"
+        android:textStyle="bold"
+        android:textColor="@color/Primariy"
+        android:textSize="24dp"
+        android:layout_alignBottom="@id/tanggal"
+        android:layout_toEndOf="@id/tanggal" />
+
+    <TextView
+        android:id="@+id/tahun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2020"
+        android:textStyle="bold"
+        android:textColor="@color/Primariy"
+        android:textSize="24dp"
+        android:layout_alignBottom="@id/tanggal"
+        android:layout_marginStart="2dp"
+        android:layout_toEndOf="@id/bulan" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
